@@ -36,7 +36,7 @@ import pandas as pd
 
 class RetrievalLayer:
 
-    model_name = "sentence-transformers/multi-qa-mpnet-base-dot-v1"
+    model_name = ""
     tokenizer = None
     model = None
     embedded_dataset = None
@@ -94,8 +94,6 @@ We just need to form a sentence from the answer which does not require big model
 import torch
 from transformers import pipeline
 
-pipe = pipeline("text-generation", model="TinyLlama/TinyLlama-1.1B-Chat-v1.0", torch_dtype=torch.bfloat16, device_map="auto")
-
 def process_question(model_pipeline, question, answer):
     messages = [
         {
@@ -138,6 +136,11 @@ model_name = "sentence-transformers/multi-qa-mpnet-base-dot-v1"
 retrieval_layer = RetrievalLayer(model_name,dataset)
 ```
 
+```python
+# Load the trained chat model
+
+pipe = pipeline("text-generation", model="TinyLlama/TinyLlama-1.1B-Chat-v1.0", torch_dtype=torch.bfloat16, device_map="auto")
+```
 
 ```python
 # Pass a question to find it's best match
